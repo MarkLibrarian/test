@@ -10,7 +10,7 @@ export default function RemoveAllScenesButton() {
     return (
       
 
-            <button onClick={removeAll}> Remove all stories</button>
+            <button onClick={removeAll}> Remove all scenes</button>
      
     )
 
