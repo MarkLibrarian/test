@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Scene from './Scene'
 import AddSceneButton from './AddSceneButton';
+import RemoveAllScenesButton from './RemoveAllScenesButton';
 
 class App extends React.Component {
   constructor(props){
@@ -20,6 +21,7 @@ class App extends React.Component {
       }
     })
   }
+
   render(){
     const scenes = this.state.scenes.map((scene, i) => <Scene key={i}/>)
   return (
@@ -28,7 +30,9 @@ class App extends React.Component {
         {scenes}
         <AddSceneButton addNewScene = {this.addNewScene}/>
         {/* <p>{this.state.scenes.length}</p> */}
+        <RemoveAllScenesButton />     
       </header>
+   
     </div>
   );
 }
