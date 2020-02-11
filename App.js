@@ -23,7 +23,7 @@ class App extends React.Component {
   };
   removeAllScenes = e => {
    
-this.setState({scenes: []});
+   this.setState({scenes: []});
 
   };
   render() {
