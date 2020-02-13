@@ -1,17 +1,9 @@
-import React from 'react'
+import React from "react";
 
-export default function RemoveAllScenesButton() {
-   function removeAll(){
-        console.log("This button should remove all stories");
-     
-     
-    }
-     
+export default function RemoveAllScenesButton(props) {
     return (
-      
-
-            <button onClick={removeAll}> Remove all scenes</button>
-     
+        <div>
+            <button onClick={props.removeAllScenes}>Remove all scenes</button>
+        </div>
     )
-
 }
