@@ -2,9 +2,9 @@ import React from 'react';
 import {render} from '@testing-library/react';
 import App from './App';
 
-test('renders "Add New Scene" component', () => {
+test('renders "Add Scene" component', () => {
     const {getByText} = render(<App/>);
-    const addNewScene = getByText(/Add new scene/i);
+    const addNewScene = getByText(/Add scene/i);
     expect(addNewScene).toBeInTheDocument();
 });
 

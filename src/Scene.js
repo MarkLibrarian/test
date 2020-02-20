@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import "./Scene.css";
 import Image from './Image'
+import StoryText from './StoryText'
 
 export default class Scene extends Component {
     render() {
+        const {scene} = this.props;
         return (
-            <div className="scene">
-                <Image/>
-                <div>
-                    <textarea defaultValue="Enter the story for your scene here"/>
-                </div>
+            <div className="Scene">
+                <Image scene={scene}/>
+                <StoryText scene={scene}/>
             </div>
         );
     }

@@ -13,11 +13,13 @@ class App extends React.Component {
     }
 
     addNewScene = () => {
-        this.setState((state, props) => {
-            const newScene = {title: "My first scene"};
-            state.scenes.push(newScene);
+        this.setState((state) => {
+            const newScene = {
+                number: state.scenes.length,
+                name: `Scene #${state.scenes.length + 1}`
+            };
             return {
-                scenes: this.state.scenes
+                scenes: [...this.state.scenes, newScene]
             }
         })
     };
@@ -27,15 +29,16 @@ class App extends React.Component {
     };
 
     render() {
-        const scenes = this.state.scenes.map((scene, i) => <Scene key={i}/>)
+        const scenes = this.state.scenes.map((scene, i) => <Scene key={i} scene={scene}/>);
         return (
             <div className="App">
-                <header className="App-header">
-                    {scenes}
+                <aside>
                     <AddSceneButton addNewScene={this.addNewScene}/>
                     <RemoveAllScenesButton removeAllScenes={this.removeAllScenes}/>
-                </header>
-
+                </aside>
+                <main>
+                    {scenes}
+                </main>
             </div>
         );
     }
