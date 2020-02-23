@@ -43,6 +43,7 @@ class EditStoryPage extends React.Component {
         removeScene={this.removeScene}
       />
     ));
+    
     return (
       <div className="EditStoryPage">
         <aside>
