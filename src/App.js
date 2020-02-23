@@ -1,47 +1,24 @@
 import React from 'react';
-import './App.css';
-import Scene from './Scene'
-import AddSceneButton from './AddSceneButton';
-import RemoveAllScenesButton from './RemoveAllScenesButton';
+import {Route, Switch} from "react-router";
+import {BrowserRouter as Router} from "react-router-dom";
+import EditStoryPage from "./pages/story/edit/EditStoryPage";
+import ViewStoryPage from "./pages/story/view/ViewStoryPage";
+import WelcomePage from "./pages/welcome/WelcomePage";
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            scenes: []
-        }
-    }
-
-    addNewScene = () => {
-        this.setState((state) => {
-            const newScene = {
-                number: state.scenes.length,
-                name: `Scene #${state.scenes.length + 1}`
-            };
-            return {
-                scenes: [...this.state.scenes, newScene]
-            }
-        })
-    };
-
-    removeAllScenes = () => {
-        this.setState({scenes: []});
-    };
-
-    render() {
-        const scenes = this.state.scenes.map((scene, i) => <Scene key={i} scene={scene}/>);
-        return (
-            <div className="App">
-                <aside>
-                    <AddSceneButton addNewScene={this.addNewScene}/>
-                    <RemoveAllScenesButton removeAllScenes={this.removeAllScenes}/>
-                </aside>
-                <main>
-                    {scenes}
-                </main>
-            </div>
-        );
-    }
+export default function () {
+    return (
+        <Router>
+            <Switch>
+                <Route path='/story/edit'>
+                    <EditStoryPage/>
+                </Route>
+                <Route path='/story/view'>
+                    <ViewStoryPage/>
+                </Route>
+                <Route path='/'>
+                    <WelcomePage/>
+                </Route>
+            </Switch>
+        </Router>
+    );
 }
-
-export default App;
