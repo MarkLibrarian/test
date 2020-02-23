@@ -1,24 +1,25 @@
 import React, { Component } from "react";
 import "./Scene.css";
-import Image from './Image'
-import StoryText from './StoryText'
-import RemoveSceneButton from './RemoveSceneButton.js'
+import Image from "./Image";
+import StoryText from "./StoryText";
 
 export default class Scene extends Component {
-    removeScene = () => {
-            alert("Functionality will soon be added to remove this scene")
-    };
-    render() {
-       
+  constructor(props) {
+    super(props);
+    this.handleRemove = this.handleRemove.bind(this);
+  }
 
-        const {scene} = this.props;
-        return (
-            <div className="Scene">
-                <Image scene={scene}/>
-                <RemoveSceneButton removeScene={this.removeScene} />
-                <StoryText scene={scene}/>
-             
-            </div>
-        );
-    }
+  handleRemove() {
+    this.props.removeScene(this.props.id);
+  }
+  render() {
+    const { scene } = this.props;
+    return (
+      <div className="Scene">
+        <Image scene={scene} />
+        <StoryText scene={scene} />
+        <button onClick={this.handleRemove}>Remove scene</button>
+      </div>
+    );
+  }
 }
