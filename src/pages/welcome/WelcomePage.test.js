@@ -1,9 +1,9 @@
 import React from 'react';
 import {render} from '@testing-library/react';
-import App from './App';
+import WelcomePage from './WelcomePage';
 
-test('displays the Welcome page by default', () => {
-    const {getByText} = render(<App/>);
+test('displays a welcoming message', () => {
+    const {getByText} = render(<WelcomePage/>);
     const welcomeMessage = getByText(/Welcome/i);
     expect(welcomeMessage).toBeInTheDocument();
 });
