@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./Scene.css";
 import Image from "./Image";
 import StoryText from "./StoryText";
-
+import RemoveSceneButton from "./RemoveSceneButton.js";
 export default class Scene extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ export default class Scene extends Component {
       <div className="Scene">
         <Image scene={scene} />
         <StoryText scene={scene} />
-        <button onClick={this.handleRemove}>Remove scene</button>
+        <RemoveSceneButton handleRemove={this.handleRemove} />
       </div>
     );
   }
