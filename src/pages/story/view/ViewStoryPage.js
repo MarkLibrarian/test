@@ -9,11 +9,15 @@ class ViewStoryPage extends React.Component {
           cursor="rayOrigin: mouse"
         >
           <a-sky src="/default-image-360.jpg" rotation="0 -130 0" />
-
+          <a-text value="Queen Street, Oxford"
+                            width="6"
+                            position="-2.5 0.25 -1.5"
+                            rotation="0 15 0"/>
           <a-link
             href="/WelcomePage"
             title="Exit to home page"
             position="-14 5.0 -8.0"
+          backgroundColor="blue"
             image=""
             geometry=""
             material=""
