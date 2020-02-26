@@ -16,7 +16,6 @@ class EditStoryPage extends React.Component {
   addNewScene = () => {
     this.setState(state => {
       const newScene = {
-        number: state.scenes.length,
         name: `Scene #${state.scenes.length + 1}`,
         id: uuid()
       };
@@ -43,7 +42,7 @@ class EditStoryPage extends React.Component {
         removeScene={this.removeScene}
       />
     ));
-    
+
     return (
       <div className="EditStoryPage">
         <aside>
