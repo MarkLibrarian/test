@@ -4,7 +4,7 @@ import "./StoryText.css";
 export default class StoryText extends Component {
     constructor(props) {
         super(props);
-        this.id = `if-${this.props.scene.id}`;
+        this.id = `if-${this.props.scene.number}`;
     }
 
     render() {
