@@ -5,6 +5,7 @@ import Scene from "./Scene";
 import AddSceneButton from "./AddSceneButton";
 import RemoveAllScenesButton from "./RemoveAllScenesButton";
 import { defaultStory } from "../../../model";
+
 class EditStoryPage extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +16,7 @@ class EditStoryPage extends React.Component {
   addNewScene = () => {
     this.setState(state => {
       const newScene = {
-        name: `Scene #${state.scenes.length + 1}`,
+        title: `Scene #${state.scenes.length + 1}`,
         id: uuid()
       };
       return {

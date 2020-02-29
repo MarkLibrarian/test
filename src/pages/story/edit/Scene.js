@@ -3,6 +3,7 @@ import "./Scene.css";
 import Image from "./Image";
 import StoryText from "./StoryText";
 import RemoveSceneButton from "./RemoveSceneButton.js";
+
 export default class Scene extends Component {
   constructor(props) {
     super(props);
