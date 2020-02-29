@@ -18,8 +18,6 @@ export default class App extends Component {
             ...this.state,
             story
         });
-        console.log(story);
-        console.log(this.state);
     }
     render() {
         return (
@@ -28,10 +26,13 @@ export default class App extends Component {
                 <Route path='/story/edit'>
                     <EditStoryPage 
                         story={this.state.story}
-                        onStoryChange={this.onStoryChange}/>
+                        onStoryChange={this.onStoryChange}
+                    />
                 </Route>
                 <Route path='/story/view'>
-                    <ViewStoryPage/>
+                    <ViewStoryPage
+                        story={this.state.story}
+                    />
                 </Route>
                 <Route path='/'>
                     <WelcomePage/>
