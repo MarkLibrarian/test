@@ -10,7 +10,6 @@ class EditStoryPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = defaultStory();
-    this.removeScene = this.removeScene.bind(this);
   }
 
   addNewScene = () => {
@@ -28,11 +27,13 @@ class EditStoryPage extends React.Component {
   removeAllScenes = () => {
     this.setState({ scenes: [] });
   };
-  removeScene(id) {
+  
+  removeScene = (id) => {
     this.setState({
       scenes: this.state.scenes.filter(scene => scene.id !== id)
     });
   }
+
   render() {
     const scenes = this.state.scenes.map((scene, i) => (
       <Scene
