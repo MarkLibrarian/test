@@ -4,37 +4,41 @@ import "./EditStoryPage.css";
 import Scene from "./Scene";
 import AddSceneButton from "./AddSceneButton";
 import RemoveAllScenesButton from "./RemoveAllScenesButton";
-import { defaultStory } from "../../../model";
 
 class EditStoryPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = defaultStory();
     this.removeScene = this.removeScene.bind(this);
   }
 
   addNewScene = () => {
-    this.setState(state => {
-      const newScene = {
-        title: `Scene #${state.scenes.length + 1}`,
-        id: uuid()
-      };
-      return {
-        scenes: [...this.state.scenes, newScene]
-      };
-    });
+    const newScene = {
+      title: `Scene #${this.props.story.scenes.length + 1}`,
+      id: uuid()
+    };
+    const newStory = {
+      ...this.props.story,
+      scenes: [...this.props.story.scenes, newScene]
+    };
+    this.props.onStoryChange(newStory);
   };
 
   removeAllScenes = () => {
-    this.setState({ scenes: [] });
+    const newStory = {
+      ...this.props.story,
+      scenes: []
+    };
+    this.props.onStoryChange(newStory);
   };
   removeScene(id) {
-    this.setState({
-      scenes: this.state.scenes.filter(scene => scene.id !== id)
-    });
+    const newStory = {
+      ...this.props.story,
+      scenes: this.props.story.scenes.filter(scene => scene.id !== id)
+    };
+    this.props.onStoryChange(newStory);
   }
   render() {
-    const scenes = this.state.scenes.map((scene, i) => (
+    const scenes = this.props.story.scenes.map((scene, i) => (
       <Scene
         key={scene.id}
         scene={scene}
