@@ -8,7 +8,8 @@ import RemoveAllScenesButton from "./RemoveAllScenesButton";
 class EditStoryPage extends React.Component {
   constructor(props) {
     super(props);
-    this.removeScene = this.removeScene.bind(this);
+    this.state = defaultStory();
+
   }
 
   addNewScene = () => {
@@ -30,13 +31,15 @@ class EditStoryPage extends React.Component {
     };
     this.props.onStoryChange(newStory);
   };
-  removeScene(id) {
-    const newStory = {
+
+  removeScene = (id) => {
+   const newStory = {
       ...this.props.story,
       scenes: this.props.story.scenes.filter(scene => scene.id !== id)
     };
     this.props.onStoryChange(newStory);
   }
+
   render() {
     const scenes = this.props.story.scenes.map((scene, i) => (
       <Scene
