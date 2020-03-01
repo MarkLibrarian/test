@@ -21,7 +21,7 @@ class ViewStoryPage extends React.Component {
                   side="double">
           <a-text value={this.props.story.scenes[0].title}
                             width="6"
- rt                           position="-0.8 0.08 0.1"
+                            position="-0.8 0.08 0.1"
                             rotation="0 0 0"
           />
           </a-box>
