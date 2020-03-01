@@ -6,7 +6,11 @@ export default function (props) {
         <div className="Image">
             <img src="/default-image.jpeg"
                  alt={props.scene.name || 'Scene Image'}/>
-            <button>Upload image</button>
+                 <form>
+                     <input placeholder="Enter image URL. "></input>
+                     <button>Upload image</button>
+                 </form>
+            
         </div>
     )
 }
