@@ -4,7 +4,8 @@ import "./EditStoryPage.css";
 import Scene from "./Scene";
 import AddSceneButton from "./AddSceneButton";
 import RemoveAllScenesButton from "./RemoveAllScenesButton";
-import {defaultStory} from "../../../../src/model.js";
+import { defaultStory } from "../../../model";
+
 class EditStoryPage extends React.Component {
   constructor(props) {
     super(props);

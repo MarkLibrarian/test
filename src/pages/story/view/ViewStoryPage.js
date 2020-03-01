@@ -11,10 +11,20 @@ class ViewStoryPage extends React.Component {
           cursor="rayOrigin: mouse"
         >
           <a-sky src="/default-image-360.jpg" rotation="0 0 0" />
+          <a-box material="color:#616161;
+                            roughness:0.2;
+                            opacity:0.7"
+                  width="3"
+                  height="0.5"
+                  depth="0.05"
+                  position="-0.5 0.75 -1.5"
+                  side="double">
           <a-text value={this.props.story.scenes[0].title}
                             width="6"
-                            position="-1.5 1 -1.5"
-                            rotation="0 0 0"/>
+ rt                           position="-0.8 0.08 0.1"
+                            rotation="0 0 0"
+          />
+          </a-box>
           <a-link
             href="/WelcomePage"
             title="Exit to home page"
