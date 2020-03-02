@@ -2,9 +2,7 @@ import React from "react";
 import "./ViewStoryPage.css";
 
 class ViewStoryPage extends React.Component {
-  constructor(props){
-    super(props);
-  }
+ 
   render() {
     return (
       <div className="ViewStoryPage">
@@ -12,14 +10,14 @@ class ViewStoryPage extends React.Component {
           raycaster="far: 100; objects: [link];"
           cursor="rayOrigin: mouse"
         >
-          <a-sky src="/default-image-360.jpg" rotation="0 -130 0" />
+          <a-sky src="/default-image-360.jpg" rotation="0 0 0" />
           <a-box material="color:#616161;
                             roughness:0.2;
                             opacity:0.7"
                   width="3"
                   height="0.5"
                   depth="0.05"
-                  position="-1 1 -1.5"
+                  position="-0.5 0.75 -1.5"
                   side="double">
           <a-text value={this.props.story.scenes[0].title}
                             width="6"
