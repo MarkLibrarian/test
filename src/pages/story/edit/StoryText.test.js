@@ -5,7 +5,7 @@ import StoryText from './StoryText';
 test('displays default text to guide the story author', () => {
     const scene = Object.freeze({
         id: 1,
-        name: 'A Pastoral Scene'
+        title: 'A Pastoral Scene'
     });
 
     const {getByText} = render(<StoryText scene={scene}/>);
@@ -17,7 +17,7 @@ test('displays default text to guide the story author', () => {
 test('displays the scene name', () => {
     const scene = Object.freeze({
         id: 1,
-        name: 'A Pastoral Scene'
+        title: 'A Pastoral Scene'
     });
 
     const {getByText} = render(<StoryText scene={scene}/>);

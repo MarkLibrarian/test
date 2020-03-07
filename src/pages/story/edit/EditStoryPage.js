@@ -38,14 +38,13 @@ class EditStoryPage extends React.Component {
       scenes: this.props.story.scenes.filter(scene => scene.id !== id)
     };
     this.props.onStoryChange(newStory);
-  }
+  };
 
   render() {
     const scenes = this.props.story.scenes.map((scene, i) => (
       <Scene
         key={scene.id}
         scene={scene}
-        id={scene.id}
         removeScene={this.removeScene}
       />
     ));
