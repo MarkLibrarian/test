@@ -19,14 +19,14 @@ class ViewStoryPage extends React.Component {
                                 position="-0.8 0.08 0.1"
                                 rotation="0 0 0"/>
                     </a-box>
-                    <a-link href="/WelcomePage"
+                    <a-link href="/"
                             title="Exit to home page"
                             position="-14 5.0 -8.0"
                             backgroundColor="blue"/>
-                    <a-link href="/WelcomePage"
+                    <a-link href="/"
                             title="Go to scene 1"
                             position="-14 0.5 -8.0"/>
-                    <a-link href="/WelcomePage"
+                    <a-link href="/"
                             title="Go to scene 2"
                             position="-14 -2.5 -8.0"/>
                 </a-scene>
