@@ -1,19 +1,21 @@
 import React from 'react';
 import './WelcomePage.css';
-import {Link} from "react-router-dom";
+import { useTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom';
 
-class WelcomePage extends React.Component {
-    render() {
-        return (
-            <div className="WelcomePage">
-                <h1>Welcome</h1>
-                <ul>
-                    <li><Link to="/story/edit">Edit Story</Link></li>
-                    <li><Link to="/story/view">View Story</Link></li>
-                </ul>
-            </div>
-        );
-    }
+export default withRouter(connect()(WelcomePage));
+
+function WelcomePage() {
+  const { t } = useTranslation();
+  return (
+    <div className="page page-welcome">
+      <h1>{t('page.welcome.heading')}</h1>
+      <ul>
+        <li>
+          <Link to="/stories">{t('linkTo.stories.text')}</Link>
+        </li>
+      </ul>
+    </div>
+  );
 }
-
-export default WelcomePage;

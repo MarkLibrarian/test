@@ -1,9 +1,0 @@
-.Scene {
-    display: flex;
-    flex-direction: row;
-
-    border-bottom: 1px dotted antiquewhite;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-}

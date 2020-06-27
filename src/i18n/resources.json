@@ -1,0 +1,19 @@
+{
+    "en": {
+        "translation": {
+            "page.welcome.heading": "Welcome",
+            "page.stories.heading": "Stories",
+            "page.welcome.createStory.text": "Create Story",
+            "page.story.edit.linkTo": "Edit Story",
+            "page.story.edit.heading": "{{title}}",
+            "page.story.view.linkTo": "View Story",
+            "page.story.view.heading": "View Story {{storyId}}",
+            "action.addScene.text": "Add Scene",
+            "action.newStory.text": "New Story",
+            "linkTo.stories.text": "View Stories",
+            "story.title.label.edit": "Edit",
+            "story.title.label": "Title",
+            "scene.placeholder.text": "Your scene fiction"
+        }
+    }
+}
