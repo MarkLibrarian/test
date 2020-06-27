@@ -1,64 +1,39 @@
-import React from "react";
-import { v4 as uuid } from "uuid";
-import "./EditStoryPage.css";
-import Scene from "./Scene";
-import AddSceneButton from "./AddSceneButton";
-import RemoveAllScenesButton from "./RemoveAllScenesButton";
-import { defaultStory } from "../../../model";
+import React from 'react';
+import './EditStoryPage.css';
+import { useParams } from 'react-router';
+import { useTranslation } from 'react-i18next';
+import { connect, useSelector } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { selectScenes, selectStory } from '../../../store/stories';
+import { Divider } from 'semantic-ui-react';
+import Scene from './Scene/Scene';
 
-class EditStoryPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = defaultStory();
-  }
+export default withRouter(connect()(EditStoryPage));
 
-  addNewScene = () => {
-    const newScene = {
-      title: `Scene #${this.props.story.scenes.length + 1}`,
-      id: uuid()
-    };
-    const newStory = {
-      ...this.props.story,
-      scenes: [...this.props.story.scenes, newScene]
-    };
-    this.props.onStoryChange(newStory);
-  };
+function EditStoryPage() {
+  const { t } = useTranslation();
 
-  removeAllScenes = () => {
-    const newStory = {
-      ...this.props.story,
-      scenes: []
-    };
-    this.props.onStoryChange(newStory);
-  };
+  const { storyId } = useParams();
+  const story = useSelector(selectStory(storyId));
+  const scenes = useSelector(selectScenes(storyId));
 
-  removeScene = (id) => {
-   const newStory = {
-      ...this.props.story,
-      scenes: this.props.story.scenes.filter(scene => scene.id !== id)
-    };
-    this.props.onStoryChange(newStory);
-  };
+  const sceneComponents = scenes.map(scene => (
+    <React.Fragment key={scene.id}>
+      <Scene scene={scene} />
+      <Divider />
+    </React.Fragment>
+  ));
 
-  render() {
-    const scenes = this.props.story.scenes.map((scene, i) => (
-      <Scene
-        key={scene.id}
-        scene={scene}
-        removeScene={this.removeScene}
-      />
-    ));
-
-    return (
-      <div className="EditStoryPage">
-        <aside>
-          <AddSceneButton addNewScene={this.addNewScene} />
-          <RemoveAllScenesButton removeAllScenes={this.removeAllScenes} />
-        </aside>
-        <main>{scenes}</main>
-      </div>
-    );
-  }
+  return (
+    <div className="page page-editStory">
+      <main>
+        <h1 title={story.id}>
+          {t('page.story.edit.heading', { title: story.title })}
+        </h1>
+        <Divider />
+        {sceneComponents}
+      </main>
+      <aside>&nbsp;</aside>
+    </div>
+  );
 }
-
-export default EditStoryPage;

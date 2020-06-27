@@ -1,0 +1,14 @@
+.scene-image {
+    display: flex;
+    flex-direction: column;
+}
+
+.thumbnail {
+    width: 192px;
+    height: 192px;
+}
+
+.upload {
+    width: 192px;
+    height: 192px;
+}
