@@ -33,7 +33,9 @@ function StoriesPage({ newStory }) {
 function listOfStories(url, allStories) {
   const stories = allStories.map(story => (
     <li key={`story-${story.id}`} className={`story story-${story.id}`}>
-      <Link to={`${url}/${story.id}`}>{story.title}</Link>
+      <Link to={`${url}/${story.id}`}>
+        {story.title} by {story.author}
+      </Link>
       &nbsp;|&nbsp;
       <Link to={`${url}/${story.id}/edit`}>Edit</Link>
     </li>

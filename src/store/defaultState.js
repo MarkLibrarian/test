@@ -3,6 +3,7 @@ export function defaultState() {
     stories: ['24'],
     storiesById: {
       '24': {
+        author: 'Telegraph plant fan',
         id: '24',
         title: 'Oxford Central Library',
         scenes: ['S001']
