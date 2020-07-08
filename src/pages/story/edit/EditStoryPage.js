@@ -29,10 +29,10 @@ function EditStoryPage() {
       <main>
         <h1 title={story.id}>
           {t('page.story.edit.heading', {
-            title: story.title
+            title: story.title,
+            author: story.author
           })}
         </h1>
-        <h1> by {`${story.author}`}</h1>
         <Divider />
         {sceneComponents}
       </main>
