@@ -17,24 +17,28 @@ function StoriesPage({ newStory }) {
     const storyId = uid();
     newStory({
       id: storyId,
-      title: 'My Story'
+      title: 'My Story',
+      author: 'Alan Smithee'
     });
     history.push(`${url}/${storyId}/edit`);
   };
   return (
     <div className="page page-stories">
       <h1>{t('page.stories.heading')}</h1>
-      {listOfStories(url, useSelector(selectStories))}
+      {listOfStories(url, useSelector(selectStories), t)}
       <button onClick={onNewStory}>{t('action.newStory.text')}</button>
     </div>
   );
 }
 
-function listOfStories(url, allStories) {
+function listOfStories(url, allStories, t) {
   const stories = allStories.map(story => (
     <li key={`story-${story.id}`} className={`story story-${story.id}`}>
       <Link to={`${url}/${story.id}`}>
-        {story.title} by {story.author}
+        {t('page.story.heading', {
+          title: story.title,
+          author: story.author
+        })}
       </Link>
       &nbsp;|&nbsp;
       <Link to={`${url}/${story.id}/edit`}>Edit</Link>
