@@ -3,6 +3,7 @@
         "translation": {
             "page.welcome.heading": "Welcome",
             "page.stories.heading": "Stories",
+            "page.stories.story.edit": "Edit",
             "page.welcome.createStory.text": "Create Story",
             "page.story.edit.linkTo": "Edit Story",
             "page.story.edit.heading": "{{title}} by {{author}}",

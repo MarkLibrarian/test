@@ -34,14 +34,17 @@ function StoriesPage({ newStory }) {
 function listOfStories(url, allStories, t) {
   const stories = allStories.map(story => (
     <li key={`story-${story.id}`} className={`story story-${story.id}`}>
-      <Link to={`${url}/${story.id}`}>
+
+      <Link to={`${url}/${story.id}`} className='view'>
         {t('page.story.heading', {
           title: story.title,
           author: story.author
         })}
       </Link>
-      &nbsp;|&nbsp;
-      <Link to={`${url}/${story.id}/edit`}>Edit</Link>
+
+      <Link to={`${url}/${story.id}/edit`} className='edit'>
+        {t('page.stories.story.edit')}
+      </Link>
     </li>
   ));
   return <ul className="stories">{stories}</ul>;
