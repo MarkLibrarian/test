@@ -30,7 +30,10 @@ export function defaultState() {
         id: 'P001',
         sceneId: 'S001',
         title: 'Choosing a book',
-        text: 'The library has tons of books to choose from.',
+        content: [{
+          type: 'paragraph',
+          children: [{ text: 'The library has tons of books to choose from.' }]
+        }],
         links: [
           {
             text: 'Choose the green book',
@@ -42,7 +45,10 @@ export function defaultState() {
         id: 'P002',
         sceneId: 'S001',
         title: 'Choosing a CD',
-        text: "The library's music selection is vast and eclectic.",
+        content: [{
+          type: 'paragraph',
+          children: [{ text: 'The library\'s music selection is vast and eclectic.' }]
+        }],
         links: [
           {
             text: 'Choose the classical CD',
@@ -54,7 +60,10 @@ export function defaultState() {
         id: 'P003',
         sceneId: 'S002',
         title: 'The Raspberry PII',
-        text: 'The MakerSpace has loads of Raspberry PIIs for you to use.',
+        content: [{
+          type: 'paragraph',
+          children: [{ text: 'The MakerSpace has loads of Raspberry PIIs for you to use.' }]
+        }],
         links: [
           {
             text: 'The 3D printer',
@@ -66,7 +75,10 @@ export function defaultState() {
         id: 'P004',
         sceneId: 'S002',
         title: 'The 3D Printer',
-        text: 'The MakerSpace has a working 3D printer!',
+        content: [{
+          type: 'paragraph',
+          children: [{ text: 'The MakerSpace has a working 3D printer!' }]
+        }],
         links: [
           {
             text: 'The Raspberry PII',
