@@ -6,14 +6,18 @@
     padding: 10px;
 }
 
+.passage {
+    text-indent: 20px;
+    margin-bottom: 20px;
+}
+
 .title {
     font-weight: bold;
     font-size: larger;
     margin-bottom: 20px;
 }
 
-hr {
-    margin-top: 10px;
+.footer {
     margin-bottom: 20px;
     border: 1px dashed slategray;
 }

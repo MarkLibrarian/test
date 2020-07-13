@@ -6,7 +6,7 @@ import { selectPassages } from '../../../../../store/stories';
 
 import './SceneFiction.css';
 import { toSlateContentModel } from './index';
-import { Leaf } from './Leaf';
+import { DefaultElement, Leaf, PassageElement } from './Leaf';
 
 export default connect(null, {})(SceneFiction);
 
@@ -23,6 +23,15 @@ function SceneFiction({ sceneId }) {
     setEditorState(state);
   };
 
+  const renderElement = useCallback(props => {
+    switch (props.element.type) {
+      case 'passage':
+        return <PassageElement {...props} />;
+      default:
+        return <DefaultElement {...props} />;
+    }
+  }, []);
+
   const renderLeaf = useCallback(props =>
     (<Leaf {...props} />), []
   );
@@ -33,7 +42,8 @@ function SceneFiction({ sceneId }) {
              value={editorState}
              onChange={onFictionChange}>
 
-        <Editable renderLeaf={renderLeaf}/>
+        <Editable renderElement={renderElement}
+                  renderLeaf={renderLeaf}/>
       </Slate>
     </div>
   );

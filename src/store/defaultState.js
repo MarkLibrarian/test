@@ -32,7 +32,10 @@ export function defaultState() {
         title: 'Choosing a book',
         content: [{
           type: 'paragraph',
-          children: [{ text: 'The library has tons of books to choose from.' }]
+          children: [
+            { text: 'The library has tons of books to choose from.' },
+            { text: ' There\'s something for everyone.' },
+          ]
         }],
         links: [
           {
