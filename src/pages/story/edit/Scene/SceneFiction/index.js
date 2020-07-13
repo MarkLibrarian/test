@@ -9,10 +9,6 @@ export function toSlateContentModel(passages) {
       children: [{ type: 'header', text: passage.title }]
     });
 
-    content.push({
-      children: [{ type: 'footer', text: '' }]
-    });
-
     return content;
   });
 }
