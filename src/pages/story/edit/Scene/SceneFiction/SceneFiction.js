@@ -1,6 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { createEditor } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
+import { withHistory } from 'slate-history';
 import { connect, useSelector } from 'react-redux';
 import { selectPassages } from '../../../../../store/stories';
 
@@ -11,7 +12,7 @@ import { DefaultElement, Leaf, PassageElement } from './Leaf';
 export default connect(null, {})(SceneFiction);
 
 function SceneFiction({ sceneId }) {
-  const editor = useMemo(() => withReact(createEditor()), []);
+  const editor = useMemo(() => withReact(withHistory(createEditor())), []);
 
   const [editorState, setEditorState] = useState(
     toSlateContentModel(
