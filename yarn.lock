@@ -1773,10 +1773,10 @@
     namespace-emitter "^2.0.1"
     preact "8.2.9"
 
-"@uppy/dashboard@1.10.2", "@uppy/dashboard@^1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@uppy/dashboard/-/dashboard-1.10.2.tgz#d901621a6ef5cdb908635f337ad7bdfabc8084bd"
-  integrity sha512-VuT9hfSH2Hvnhb+Fq1fPndnFkbKbrHu+5fUw5I5GOh/W8siB8GKFbTzEDYq9qmQv9ozHBwmMKM+WHYpqPFyzuw==
+"@uppy/dashboard@1.11.0", "@uppy/dashboard@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@uppy/dashboard/-/dashboard-1.11.0.tgz#34983bcffa10af3903aa1c035c874ea3ad7f93d8"
+  integrity sha512-nxWDk7/sMw245FrmJhaBiD3Wt29YQ+Dnk83MabaABgwXxcm2qDtUseP3InjQ+JHeg68CVQoyNH1KtnQSGN5bgQ==
   dependencies:
     "@transloadit/prettier-bytes" "0.0.7"
     "@uppy/informer" "^1.5.8"
@@ -1827,12 +1827,12 @@
     classnames "^2.2.6"
     preact "8.2.9"
 
-"@uppy/react@1.9.0":
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/@uppy/react/-/react-1.9.0.tgz#b31b31562db706692ddfd65f502416cb67cea5df"
-  integrity sha512-bZK0lLPMiXDHD7l818qqZc+KLf/L3GF7Y6OcSOBmGSwmhPBGHK9ZakKCgLq4iHeNxeB+q5FohuY8JeCPxlyRxA==
+"@uppy/react@1.9.1":
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/@uppy/react/-/react-1.9.1.tgz#1b0a48326ea08b2b45f8acba3540056e04e19f95"
+  integrity sha512-9Vj6r0gXVfPlF15oV2JA0Rn/It0U1Igy0GhO8wvyekMw8KgXZG6KbxqeVzfhj5C36cCXBnkux8NrPhyQ/+rUaw==
   dependencies:
-    "@uppy/dashboard" "^1.10.2"
+    "@uppy/dashboard" "^1.11.0"
     "@uppy/drag-drop" "^1.4.16"
     "@uppy/progress-bar" "^1.3.16"
     "@uppy/status-bar" "^1.7.1"
