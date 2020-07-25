@@ -36,7 +36,7 @@ function SceneFiction({ sceneId }) {
 
   const scenePassages = useSelector(selectPassages(sceneId));
 
-  const passageOptions = scenePassages.filter(passage =>
+  const exits = scenePassages.filter(passage =>
     passage.title.toLowerCase().startsWith(exitSearch.toLowerCase())
   ).slice(0, 10);
 
@@ -47,23 +47,25 @@ function SceneFiction({ sceneId }) {
 
     const { selection } = editor;
 
-    if (selection && Range.isCollapsed(selection)) {
-      const [start] = Range.edges(selection);
-      const wordBefore = Editor.before(editor, start, { unit: 'word' });
-      const before = wordBefore && Editor.before(editor, wordBefore);
-      const beforeRange = before && Editor.range(editor, before, start);
-      const beforeText = beforeRange && Editor.string(editor, beforeRange);
-      const beforeMatch = beforeText && beforeText.match(/^#(\w+)$/);
-      const after = Editor.after(editor, start);
-      const afterRange = Editor.range(editor, start, after);
-      const afterText = Editor.string(editor, afterRange);
-      const afterMatch = afterText.match(/^(\s|$)/);
+    if (selection) {
+      if (Range.isCollapsed(selection)) {
+        const [start] = Range.edges(selection);
+        const wordBefore = Editor.before(editor, start, { unit: 'word' });
+        const before = wordBefore && Editor.before(editor, wordBefore);
+        const beforeRange = before && Editor.range(editor, before, start);
+        const beforeText = beforeRange && Editor.string(editor, beforeRange);
+        const beforeMatch = beforeText && beforeText.match(/^@(\w+)$/);
+        const after = Editor.after(editor, start);
+        const afterRange = Editor.range(editor, start, after);
+        const afterText = Editor.string(editor, afterRange);
+        const afterMatch = afterText.match(/^(\s|$)/);
 
-      if (beforeMatch && afterMatch) {
-        setExitTarget(beforeRange);
-        setExitSearch(beforeMatch[1]);
-        setExitIndex(0);
-        return;
+        if (beforeMatch && afterMatch) {
+          setExitTarget(beforeRange);
+          setExitSearch(beforeMatch[1]);
+          setExitIndex(0);
+          return;
+        }
       }
     }
 
@@ -76,19 +78,19 @@ function SceneFiction({ sceneId }) {
         switch (event.key) {
           case 'ArrowDown':
             event.preventDefault();
-            const prevIndex = exitIndex >= passageOptions.length - 1 ? 0 : exitIndex + 1;
+            const prevIndex = exitIndex >= exits.length - 1 ? 0 : exitIndex + 1;
             setExitIndex(prevIndex);
             break;
           case 'ArrowUp':
             event.preventDefault();
-            const nextIndex = exitIndex <= 0 ? passageOptions.length - 1 : exitIndex - 1;
+            const nextIndex = exitIndex <= 0 ? exits.length - 1 : exitIndex - 1;
             setExitIndex(nextIndex);
             break;
           case 'Tab':
           case 'Enter':
             event.preventDefault();
             Transforms.select(editor, exitTarget);
-            insertExit(editor, passageOptions[exitIndex]);
+            insertExit(editor, exits[exitIndex]);
             setExitTarget(null);
             break;
           case 'Escape':
@@ -100,7 +102,7 @@ function SceneFiction({ sceneId }) {
         }
       }
     },
-    [exitIndex, exitTarget, editor, passageOptions]
+    [exitIndex, exitTarget, editor, exits]
   );
 
   const insertExit = (editor, passage) => {
@@ -109,15 +111,17 @@ function SceneFiction({ sceneId }) {
     Transforms.move(editor);
   };
 
+  const weShouldDisplayTheExitsMenu = useCallback(() => exitTarget && exits.length, [exitTarget, exits])
+
   useEffect(() => {
-    if (exitTarget && passageOptions.length > 0) {
+    if (weShouldDisplayTheExitsMenu()) {
       const el = ref.current;
       const domRange = ReactEditor.toDOMRange(editor, exitTarget);
       const rect = domRange.getBoundingClientRect();
       el.style.top = `${rect.top + window.pageYOffset + 24}px`;
       el.style.left = `${rect.left + window.pageXOffset}px`;
     }
-  }, [passageOptions.length, editor, exitTarget]);
+  }, [weShouldDisplayTheExitsMenu, editor, exitTarget]);
 
   const renderElement = useCallback(props => {
     switch (props.element.type) {
@@ -144,10 +148,10 @@ function SceneFiction({ sceneId }) {
                   renderLeaf={renderLeaf}
                   renderElement={renderElement}/>
 
-        {exitTarget && passageOptions.length > 0 && (
+        {weShouldDisplayTheExitsMenu() > 0 && (
           <Portal>
             <div ref={ref} className='exit-picker'>
-              {passageOptions.map((passage, i) => (
+              {exits.map((passage, i) => (
                 <div key={passage.id}
                      className={`exit-option ${i === exitIndex ? 'active' : ''}`}>
                   {passage.title}
