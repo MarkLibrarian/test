@@ -4,15 +4,19 @@ import ReactDOM from 'react-dom';
 export function Leaf({ attributes, children, leaf }) {
   switch (leaf.type) {
     case 'header':
-      return (<div {...attributes} className='title'>{children}</div>);
+      return (
+        <div {...attributes} className="title">
+          {children}
+        </div>
+      );
     default:
-      return (<span {...attributes}>{children}</span>);
+      return <span {...attributes}>{children}</span>;
   }
 }
 
 export const PassageElement = props => {
   return (
-    <div {...props.attributes} className='passage'>
+    <div {...props.attributes} className="passage">
       {props.children}
     </div>
   );
@@ -24,17 +28,13 @@ export const DefaultElement = props => {
 
 export const ExitElement = ({ attributes, children, element }) => {
   return (
-    <span
-      {...attributes}
-      contentEditable={false}
-      className='exit'>
-
-      #{element.exit}
+    <span {...attributes} contentEditable={false} className="exit">
+      @{element.title}
       {children}
     </span>
   );
 };
 
 export const Portal = ({ children }) => {
-  return ReactDOM.createPortal(children, document.body)
-}
+  return ReactDOM.createPortal(children, document.body);
+};

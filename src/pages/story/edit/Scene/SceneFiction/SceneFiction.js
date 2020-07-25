@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import { createEditor, Editor, Range, Transforms } from 'slate';
 import { Editable, ReactEditor, Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
@@ -6,12 +12,17 @@ import { connect, useSelector } from 'react-redux';
 import { selectPassages } from '../../../../../store/stories';
 import './SceneFiction.css';
 import { toSlateContentModel } from './index';
-import { DefaultElement, ExitElement, Leaf, PassageElement, Portal } from './Elements';
+import {
+  DefaultElement,
+  ExitElement,
+  Leaf,
+  PassageElement,
+  Portal
+} from './Elements';
 
 export default connect(null, {})(SceneFiction);
 
 function SceneFiction({ sceneId }) {
-
   const withExits = editor => {
     const { isInline, isVoid } = editor;
 
@@ -32,15 +43,22 @@ function SceneFiction({ sceneId }) {
   const [exitIndex, setExitIndex] = useState(0);
   const [exitSearch, setExitSearch] = useState('');
 
-  const editor = useMemo(() => withExits(withReact(withHistory(createEditor()))), []);
+  const editor = useMemo(
+    () => withExits(withReact(withHistory(createEditor()))),
+    []
+  );
 
   const scenePassages = useSelector(selectPassages(sceneId));
 
-  const exits = scenePassages.filter(passage =>
-    passage.title.toLowerCase().startsWith(exitSearch.toLowerCase())
-  ).slice(0, 10);
+  const exits = scenePassages
+    .filter(passage =>
+      passage.title.toLowerCase().startsWith(exitSearch.toLowerCase())
+    )
+    .slice(0, 10);
 
-  const [editorState, setEditorState] = useState(toSlateContentModel(scenePassages));
+  const [editorState, setEditorState] = useState(
+    toSlateContentModel(scenePassages)
+  );
 
   const onFictionChange = state => {
     setEditorState(state);
@@ -90,7 +108,7 @@ function SceneFiction({ sceneId }) {
           case 'Enter':
             event.preventDefault();
             Transforms.select(editor, exitTarget);
-            insertExit(editor, exits[exitIndex]);
+            insertExit(editor, exits[exitIndex].title);
             setExitTarget(null);
             break;
           case 'Escape':
@@ -105,13 +123,22 @@ function SceneFiction({ sceneId }) {
     [exitIndex, exitTarget, editor, exits]
   );
 
-  const insertExit = (editor, passage) => {
-    const exit = { type: 'exit', exit: passage.title, children: [{ text: '' }] };
+  const insertExit = (editor, text) => {
+    const exit = {
+      type: 'exit',
+      title: text,
+      children: [{ text: '' }]
+    };
+    console.log('Before', editor.children);
     Transforms.insertNodes(editor, exit);
+    console.log('After', JSON.stringify(editor.children));
     Transforms.move(editor);
   };
 
-  const weShouldDisplayTheExitsMenu = useCallback(() => exitTarget && exits.length, [exitTarget, exits])
+  const weShouldDisplayTheExitsMenu = useCallback(
+    () => exitTarget && exits.length,
+    [exitTarget, exits]
+  );
 
   useEffect(() => {
     if (weShouldDisplayTheExitsMenu()) {
@@ -134,26 +161,25 @@ function SceneFiction({ sceneId }) {
     }
   }, []);
 
-  const renderLeaf = useCallback(props =>
-    (<Leaf {...props} />), []
-  );
+  const renderLeaf = useCallback(props => <Leaf {...props} />, []);
 
   return (
     <div className="scene-fiction">
-      <Slate editor={editor}
-             value={editorState}
-             onChange={onFictionChange}>
-
-        <Editable onKeyDown={onKeyDown}
-                  renderLeaf={renderLeaf}
-                  renderElement={renderElement}/>
+      <Slate editor={editor} value={editorState} onChange={onFictionChange}>
+        <Editable
+          onKeyDown={onKeyDown}
+          renderLeaf={renderLeaf}
+          renderElement={renderElement}
+        />
 
         {weShouldDisplayTheExitsMenu() > 0 && (
           <Portal>
-            <div ref={ref} className='exit-picker'>
+            <div ref={ref} className="exit-picker">
               {exits.map((passage, i) => (
-                <div key={passage.id}
-                     className={`exit-option ${i === exitIndex ? 'active' : ''}`}>
+                <div
+                  key={passage.id}
+                  className={`exit-option ${i === exitIndex ? 'active' : ''}`}
+                >
                   {passage.title}
                 </div>
               ))}

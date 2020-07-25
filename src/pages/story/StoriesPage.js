@@ -13,6 +13,7 @@ function StoriesPage({ newStory }) {
   const { t } = useTranslation();
   const { url } = useRouteMatch();
   const history = useHistory();
+
   const onNewStory = () => {
     const storyId = uid();
     newStory({
@@ -34,15 +35,14 @@ function StoriesPage({ newStory }) {
 function listOfStories(url, allStories, t) {
   const stories = allStories.map(story => (
     <li key={`story-${story.id}`} className={`story story-${story.id}`}>
-
-      <Link to={`${url}/${story.id}`} className='view'>
+      <Link to={`${url}/${story.id}`} className="view">
         {t('page.story.heading', {
           title: story.title,
           author: story.author
         })}
       </Link>
 
-      <Link to={`${url}/${story.id}/edit`} className='edit'>
+      <Link to={`${url}/${story.id}/edit`} className="edit">
         {t('page.stories.story.edit')}
       </Link>
     </li>

@@ -6,10 +6,13 @@
     padding: 10px;
 }
 
-.passage:not(:last-child) {
+.passage {
     text-indent: 20px;
     margin-bottom: 20px;
     padding-bottom: 10px;
+}
+
+.passage:not(:last-child) {
     border-bottom: 1px dotted slategray;
 }
 
