@@ -1,18 +1,35 @@
-export function toSlateContentModel(passages) {
-  return passages.flatMap(passage => {
-    const content = [{
-      type: 'passage',
-      children: [...passage.content]
-    }];
+import { Elements } from './Elements';
 
-    content.unshift({
-      children: [{ type: 'header', text: passage.title }]
-    });
-
-    return content;
-  });
+export function toSlateContent(passages) {
+  return passages.flatMap(toSlatePassage);
 }
 
-export function toPassagesModel(content) {
-  throw new Error('Not implemented');
+export function toSlatePassage(passage) {
+  return [
+    {
+      type: 'paragraph',
+      children: [{ type: Elements.Header.type, text: passage.title }]
+    },
+    {
+      type: Elements.Passage.type,
+      children: [...passage.content]
+    }
+  ];
+}
+
+export function defaultNewPassageSlateContent() {
+  return [
+    {
+      type: 'paragraph',
+      children: [{ text: 'Lorem ipsum dolor sit amet…' }]
+    }
+  ];
+}
+
+export function toSlateExit(text) {
+  return {
+    type: Elements.Exit.type,
+    title: text,
+    children: [{ text: '' }]
+  };
 }

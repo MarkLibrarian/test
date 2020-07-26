@@ -30,10 +30,10 @@
     "uid": "1.0.0"
   },
   "devDependencies": {
+    "@testing-library/dom": "7.20.1",
     "@testing-library/jest-dom": "4.2.4",
     "@testing-library/react": "9.5.0",
     "@testing-library/user-event": "12.0.14",
-    "@testing-library/dom": "7.20.1",
     "prettier": "1.19.1",
     "redux-devtools": "3.5.0"
   },
