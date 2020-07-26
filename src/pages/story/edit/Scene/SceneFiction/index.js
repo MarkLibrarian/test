@@ -26,10 +26,26 @@ export function defaultNewPassageSlateContent() {
   ];
 }
 
-export function toSlateExit(text) {
+export function toSlateExit(title) {
   return {
     type: Elements.Exit.type,
-    title: text,
+    title,
     children: [{ text: '' }]
   };
+}
+
+export function parseExit(text) {
+  // "enter the library" | "enter the library|go inside"
+  if (text.includes('|')) {
+    const parts = text.split('|');
+    return {
+      title: parts[0].trim(),
+      text: parts[1].trim()
+    };
+  } else {
+    return {
+      title: text.trim(),
+      text: text.trim()
+    };
+  }
 }

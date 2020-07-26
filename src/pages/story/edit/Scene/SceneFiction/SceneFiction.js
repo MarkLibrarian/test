@@ -13,6 +13,7 @@ import { newPassage, selectPassages } from '../../../../../store/stories';
 import './SceneFiction.css';
 import {
   defaultNewPassageSlateContent,
+  parseExit,
   toSlateContent,
   toSlateExit,
   toSlatePassage
@@ -43,6 +44,7 @@ function SceneFiction({ sceneId, newPassage }) {
   const [exitTarget, setExitTarget] = useState();
   const [exitIndex, setExitIndex] = useState(0);
   const [exitSearch, setExitSearch] = useState('');
+  const [linkingToExit, setLinkingToExit] = useState(false);
 
   const editor = useMemo(
     () => withExits(withReact(withHistory(createEditor()))),
@@ -71,17 +73,19 @@ function SceneFiction({ sceneId, newPassage }) {
         const before = wordBefore && Editor.before(editor, wordBefore);
         const beforeRange = before && Editor.range(editor, before, start);
         const beforeText = beforeRange && Editor.string(editor, beforeRange);
-        const exitMention = beforeText && beforeText.match(/^@(\w+)$/);
+        const mentioningExistingExit =
+          beforeText && beforeText.match(/^@(\w+)$/);
 
-        if (exitMention) {
-          const exitSearchText = exitMention[1];
+        if (mentioningExistingExit) {
+          const exitSearchText = mentioningExistingExit[1];
           setExitSearch(exitSearchText);
           const hits = hasAnyPassagesMatching(scenePassages, exitSearchText);
           if (hits) {
+            // noinspection JSCheckFunctionSignatures
             setExitTarget(beforeRange);
             setExitIndex(0);
-            return;
           }
+          return;
         }
       }
     }
@@ -119,42 +123,71 @@ function SceneFiction({ sceneId, newPassage }) {
           default:
             break;
         }
-      } else if (exitSearch) {
+      } else {
         switch (event.key) {
-          case ' ':
-            event.preventDefault();
-
+          case '[': {
             const { selection } = editor;
             if (selection) {
               const [start] = Range.edges(selection);
-              const wordBefore = Editor.before(editor, start, { unit: 'word' });
-              const before = wordBefore && Editor.before(editor, wordBefore);
+              const lineBefore = Editor.before(editor, start, { unit: 'line' });
+              const before = lineBefore && Editor.before(editor, lineBefore);
               const beforeRange = before && Editor.range(editor, before, start);
               const beforeText =
                 beforeRange && Editor.string(editor, beforeRange);
 
-              const title =
-                beforeText.charAt(1).toUpperCase() +
-                beforeText.trim().substring(2);
-              const p = newPassage({
-                sceneId,
-                title,
-                content: defaultNewPassageSlateContent()
-              });
-
-              Transforms.select(editor, beforeRange);
-              insertExit(editor, beforeText.trim().substring(1));
-              Transforms.insertNodes(
-                editor,
-                toSlatePassage({ title, content: p.payload.content }),
-                {
-                  at: [editor.children.length] // stick it at the end
-                }
-              );
+              if (beforeText.substr(beforeText.length - 1) === '[') {
+                setLinkingToExit(true);
+              }
             }
-            setExitSearch('');
-            setExitTarget(null);
             break;
+          }
+          case ']': {
+            const { selection } = editor;
+            if (selection && linkingToExit) {
+              const [start] = Range.edges(selection);
+              const lineBefore = Editor.before(editor, start, { unit: 'line' });
+              const before = lineBefore && Editor.before(editor, lineBefore);
+              const beforeRange = before && Editor.range(editor, before, start);
+              const beforeText =
+                beforeRange && Editor.string(editor, beforeRange);
+              const linkExpression =
+                beforeText && beforeText.match(/\[\[(.+)\]/);
+
+              if (linkExpression) {
+                const exit = parseExit(linkExpression[1]);
+                event.preventDefault();
+                setLinkingToExit(false);
+
+                const p = newPassage({
+                  sceneId,
+                  title: exit.title,
+                  content: defaultNewPassageSlateContent()
+                });
+                Transforms.select(editor, {
+                  ...selection,
+                  anchor: {
+                    ...selection.anchor,
+                    offset:
+                      selection.anchor.offset -
+                      linkExpression[1].length -
+                      3 /* 3 to account for the surrounding [[]*/
+                  }
+                });
+                insertExit(editor, exit.text);
+                Transforms.insertNodes(
+                  editor,
+                  toSlatePassage({
+                    title: exit.title,
+                    content: p.payload.content
+                  }),
+                  {
+                    at: [editor.children.length] // stick it at the end
+                  }
+                );
+              }
+            }
+            break;
+          }
           default:
             break;
         }
@@ -179,7 +212,9 @@ function SceneFiction({ sceneId, newPassage }) {
       const el = ref.current;
       const domRange = ReactEditor.toDOMRange(editor, exitTarget);
       const rect = domRange.getBoundingClientRect();
+      // noinspection JSUnresolvedVariable
       el.style.top = `${rect.top + window.pageYOffset + 24}px`;
+      // noinspection JSUnresolvedVariable
       el.style.left = `${rect.left + window.pageXOffset}px`;
     }
   }, [theExitMenuShouldBeDisplayed, editor, exitTarget]);
@@ -197,7 +232,11 @@ function SceneFiction({ sceneId, newPassage }) {
           <Portal>
             <div ref={ref} className="exit-picker">
               {exits.map((passage, i) => (
-                <ExitOption passage={passage} isSelected={i === exitIndex} />
+                <ExitOption
+                  key={`exit-${i}`}
+                  passage={passage}
+                  isSelected={i === exitIndex}
+                />
               ))}
             </div>
           </Portal>
