@@ -1,3 +1,4 @@
+import uid from 'uid';
 import { createSlice } from '@reduxjs/toolkit';
 import { defaultState } from './defaultState';
 
@@ -5,18 +6,44 @@ const storiesSlice = createSlice({
   name: 'stories',
   initialState: defaultState(),
   reducers: {
-    newStory(state, action) {
-      const { id, title } = action.payload;
-      state.stories.push(id);
-      state.storiesById[id] = {
-        id,
-        title
-      };
+    newStory: addStory,
+    newPassage: {
+      reducer: addPassage,
+      prepare: passage => ({
+        payload: {
+          id: uid(),
+          ...passage
+        }
+      })
     }
   }
 });
 
-export const { newStory } = storiesSlice.actions;
+function addStory({ stories }, action) {
+  const { id, title } = action.payload;
+  stories.stories.push(id);
+  stories.storiesById[id] = {
+    id,
+    title
+  };
+}
+
+function addPassage(state, action) {
+  const { id, sceneId, title, content } = action.payload;
+
+  state.stories.passagesById[id] = {
+    id,
+    sceneId,
+    title,
+    content,
+    links: []
+  };
+
+  const scene = selectScene(sceneId)(state);
+  scene.passages.push(id);
+}
+
+export const { newStory, newPassage } = storiesSlice.actions;
 
 export default storiesSlice.reducer;
 

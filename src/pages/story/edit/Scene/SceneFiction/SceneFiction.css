@@ -5,3 +5,56 @@
     height: 100%;
     padding: 10px;
 }
+
+.passage {
+    text-indent: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.passage:not(:last-child) {
+    border-bottom: 1px dotted slategray;
+}
+
+.exit {
+    padding: 3px 3px 2px;
+    vertical-align: baseline;
+    display: inline-block;
+    text-indent: 0;
+    color: cadetblue;
+}
+
+.title {
+    font-weight: bold;
+    font-size: larger;
+    margin-bottom: 20px;
+}
+
+.footer {
+    margin-bottom: 20px;
+    border: 1px dashed slategray;
+}
+
+.exit-picker {
+    top: -9999px;
+    left: -9999px;
+    position: absolute;
+    z-index: 1;
+    padding: 3px;
+    background: gray;
+    color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2)
+}
+
+.exit-option {
+    padding: 1px 3px;
+    border-radius: 3px;
+    background: transparent;
+}
+
+
+.exit-option.active {
+    background: #282c34;
+    color: white;
+}
