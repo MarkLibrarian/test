@@ -20,11 +20,12 @@ const storiesSlice = createSlice({
 });
 
 function addStory({ stories }, action) {
-  const { id, title } = action.payload;
+  const { id, title, author } = action.payload;
   stories.stories.push(id);
   stories.storiesById[id] = {
     id,
-    title
+    title,
+    author
   };
 }
 
