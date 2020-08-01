@@ -1,0 +1,11 @@
+{% extends "layouts/main.njk" %}
+
+{% block head %}
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+{% endblock %}
+
+{% block body %}
+    <a-scene>
+      <a-sky src="{{story.scene.image.url}}"/>
+    </a-scene>
+{% endblock %}

@@ -2,14 +2,12 @@
 
 # dependencies
 /node_modules
-/.pnp
-.pnp.js
 
 # testing
-/coverage
+coverage
 
 # production
-/build
+build
 
 # misc
 .DS_Store
@@ -18,6 +16,12 @@
 .env.test.local
 .env.production.local
 
-npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+package-lock.json
+
+config/local.json*
+
+server/stories/format/grammar.js
+/packages/frontend/node_modules/

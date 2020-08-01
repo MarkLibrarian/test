@@ -1,0 +1,34 @@
+.page-editStory {
+  margin: 20px;
+  display: flex;
+}
+
+main {
+  flex: 3 1 auto;
+  margin: 10px 20px 10px 10px;
+  width: 75%;
+  max-width: 75%;
+}
+
+aside {
+  flex: 1 1 auto;
+  min-width: 100px;
+  margin: 10px;
+  border: 1px solid gray;
+}
+
+h1 {
+  color: gray;
+}
+
+main div.story-header {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  align-content: space-between;
+}
+
+.story-header h1 {
+  display: inline-block;
+  flex: 3;
+}

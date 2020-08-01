@@ -1,0 +1,11 @@
+/node_modules
+
+public/*.css
+
+# testing
+coverage
+
+# production
+build
+
+docs/

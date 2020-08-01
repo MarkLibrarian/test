@@ -1,0 +1,28 @@
+{
+  "en": {
+    "translation": {
+      "page.welcome.heading": "Welcome",
+      "page.stories.heading": "Stories",
+      "page.stories.story.edit": "Edit",
+      "page.storiesByAuthor.heading": "Stories by {{author}}",
+      "page.welcome.createStory.text": "Create Story",
+      "page.story.edit.linkTo": "Edit Story",
+      "page.story.edit.heading": "{{title}}",
+      "page.story.edit.heading.loading": "Loading",
+      "page.story.edit.addScene": "Add Scene",
+      "page.story.edit.sceneImage.textAlt": "Scene image for \"{{title}}\"",
+      "page.story.heading": "{{title}} by {{author}}",
+      "page.story.view.linkTo": "View Story",
+      "page.story.view.heading": "View Story {{storyId}}",
+      "page.notFound.heading": "Not Found",
+      "page.notFound.text": "No match found for <0>{{path}}</0>",
+      "action.newStory.text": "New Story",
+      "linkTo.yourStories.text": "Your Stories",
+      "linkTo.homePage.text": "Home",
+      "sceneImage.fileUpload.dropPasteFiles": "Drop or %{browse}",
+      "sceneImage.fileUpload.browse": "browse",
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  }
+}

@@ -1,9 +1,20 @@
 # Virtual Storytelling Project
-The aim of our project is to make a super-cool VR storytelling app for young people.
-## Learn More
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A super-cool VR storytelling app for young people.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Running
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### What You'll Need
+
+- [Docker](https://www.docker.com/get-started)
+- [Yarn](https://yarnpkg.com/getting-started)
+
+```
+$ EXPORT NODE_ENV=localhost
+$ yarn install
+$ docker-compose up -d
+$ yarn build
+$ yarn dev
+```
+
+View the app in your browser at [http://localhost:5000](http://localhost:5000).

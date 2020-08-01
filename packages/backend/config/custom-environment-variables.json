@@ -1,0 +1,9 @@
+{
+  "port": "PORT",
+  "db": {
+    "connectionString": "DATABASE_URL"
+  },
+  "cloudinary": {
+    "url": "CLOUDINARY_URL"
+  }
+}

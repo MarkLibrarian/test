@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+
+        <title>{{ title }}</title>
+        <meta name="description" content="{{ title }}" />
+
+        {% block head %} {% endblock %}
+    </head>
+    <body>
+        {% block header %} {% endblock %}
+
+        {% block body %} {% endblock %}
+
+        {% block footer %}
+        {% block javascript %} {% endblock %}
+        {% endblock %}
+    </body>
+</html>

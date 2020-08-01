@@ -1,0 +1,6 @@
+.page-stories {
+}
+
+.story a.view:after {
+  content: ' | ';
+}
