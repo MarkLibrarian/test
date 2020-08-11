@@ -7,6 +7,7 @@ const storiesSlice = createSlice({
   initialState: defaultState(),
   reducers: {
     newStory: addStory,
+    updateSceneTitle: saveSceneTitle,
     newPassage: {
       reducer: addPassage,
       prepare: passage => ({
@@ -18,6 +19,11 @@ const storiesSlice = createSlice({
     }
   }
 });
+
+function saveSceneTitle(state, action) {
+  const { id, updatedTitle } = action.payload;
+  state.stories.scenesById[id].title = updatedTitle;
+}
 
 function addStory({ stories }, action) {
   const { id, title } = action.payload;
@@ -43,7 +49,7 @@ function addPassage(state, action) {
   scene.passages.push(id);
 }
 
-export const { newStory, newPassage } = storiesSlice.actions;
+export const { newStory, updateSceneTitle, newPassage } = storiesSlice.actions;
 
 export default storiesSlice.reducer;
 
