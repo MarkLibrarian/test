@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import './SceneTitle.css';
 import { updateSceneTitle } from '../../../../store/stories';
 import { connect } from 'react-redux';
@@ -49,9 +49,6 @@ function SceneTitle({scene, updateSceneTitle}) {
     const defaultView = () => {
         return(
         <div>
-            {/* <h2>{scene.title}</h2> 
-            <button onClick={startEditing}>{scene.title}</button>
-            */}
             <h2 onDoubleClick={startEditing}>{scene.title}</h2>
         </div>
         )
