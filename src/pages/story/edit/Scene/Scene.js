@@ -4,6 +4,7 @@ import { connect, useSelector } from 'react-redux';
 import { SceneImage } from './SceneImage/SceneImage';
 import SceneFiction from './SceneFiction/SceneFiction';
 import { selectImage } from '../../../../store/stories';
+import SceneTitle from './SceneTitle'
 
 export default connect()(Scene);
 
@@ -11,7 +12,8 @@ function Scene({ scene }) {
   const image = useSelector(selectImage(scene.image));
   return (
     <div className="scene">
-      <h2>{scene.title}</h2>
+      <SceneTitle scene={scene}/>
+      
       <div className="main">
         <div className="content">
           <SceneFiction sceneId={scene.id} />
