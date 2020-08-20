@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import { selectScenes, selectStory } from '../../../store/stories';
 import { Divider } from 'semantic-ui-react';
 import Scene from './Scene/Scene';
+import StoryTitle from './StoryTitle';
 
 export default withRouter(connect()(EditStoryPage));
 
@@ -32,6 +33,7 @@ function EditStoryPage() {
             title: story.title,
             author: story.author
           })}
+         <StoryTitle story={story}/>
         </h1>
         <Divider />
         {sceneComponents}
