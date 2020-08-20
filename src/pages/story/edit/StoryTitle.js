@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import { updateStoryTitle } from '../../../store/stories';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 
 export default connect(null, { updateStoryTitle })(StoryTitle);
 
 function StoryTitle({story, updateStoryTitle}) {
-    const {id, title} = story
+    const { t } = useTranslation();
+    const {id, title} = story;
     const [editing, setEditing] = useState(false);
     const [newTitle, setNewTitle] = useState(title);
 
@@ -34,13 +36,13 @@ function StoryTitle({story, updateStoryTitle}) {
         return(
         <div>
             <input 
-                type ="text"
-                name ="title"
-                defaultValue={title}
-                onChange={handleChange}
+                type = "text"
+                name = "title"
+                defaultValue = {title}
+                onChange = {handleChange}
             />
-            <button onClick={saveTitle}>Save</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <button onClick = {saveTitle}>Save</button>
+            <button onClick = {handleCancel}>Cancel</button>
         </div> 
         )
     }
@@ -48,7 +50,12 @@ function StoryTitle({story, updateStoryTitle}) {
     const defaultView = () => {
         return(
         <div>
-            <h2 onDoubleClick={startEditing}>{story.title}</h2>
+            <h1 title={story.id} onDoubleClick={startEditing}>
+                {t('page.story.edit.heading', {
+                    title: story.title,
+                    author: story.author
+                })}
+            </h1>
         </div>
         )
     }
