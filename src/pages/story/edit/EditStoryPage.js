@@ -1,18 +1,16 @@
 import React from 'react';
 import './EditStoryPage.css';
 import { useParams } from 'react-router';
-import { useTranslation } from 'react-i18next';
 import { connect, useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { selectScenes, selectStory } from '../../../store/stories';
 import { Divider } from 'semantic-ui-react';
 import Scene from './Scene/Scene';
+import StoryTitle from './StoryTitle';
 
 export default withRouter(connect()(EditStoryPage));
 
 function EditStoryPage() {
-  const { t } = useTranslation();
-
   const { storyId } = useParams();
   const story = useSelector(selectStory(storyId));
   const scenes = useSelector(selectScenes(storyId));
@@ -27,12 +25,7 @@ function EditStoryPage() {
   return (
     <div className="page page-editStory">
       <main>
-        <h1 title={story.id}>
-          {t('page.story.edit.heading', {
-            title: story.title,
-            author: story.author
-          })}
-        </h1>
+        <StoryTitle story={story}/>
         <Divider />
         {sceneComponents}
       </main>
