@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './SceneTitle.css';
 import { updateSceneTitle } from '../../../../store/stories';
 import { connect } from 'react-redux';
+import { Icon } from 'semantic-ui-react';
 
 export default connect(null, { updateSceneTitle })(SceneTitle);
 
@@ -49,9 +50,10 @@ function SceneTitle({scene, updateSceneTitle}) {
     const defaultView = () => {
         return(
         <div>
-            <h2 onDoubleClick={startEditing}>{scene.title}</h2>
+            <h2 className ="sceneTitle">{scene.title}</h2>
+            <Icon name="edit" onClick={startEditing} /> 
         </div>
-        )
+        ) 
     }
    
     return (
