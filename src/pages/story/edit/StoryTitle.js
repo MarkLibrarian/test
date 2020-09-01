@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import { updateStoryTitle } from '../../../store/stories';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import './StoryTitle.css';
+import { Icon } from 'semantic-ui-react';
 
 export default connect(null, { updateStoryTitle })(StoryTitle);
 
@@ -50,12 +52,13 @@ function StoryTitle({story, updateStoryTitle}) {
     const defaultView = () => {
         return(
         <div>
-            <h1 title={story.id} onDoubleClick={startEditing}>
+            <h1 title={story.id} className="storyTitle">
                 {t('page.story.edit.heading', {
                     title: story.title,
                     author: story.author
                 })}
             </h1>
+            <Icon name="edit" onClick={startEditing} />
         </div>
         )
     }
