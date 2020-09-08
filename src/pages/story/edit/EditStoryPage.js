@@ -1,20 +1,25 @@
 import React from 'react';
 import './EditStoryPage.css';
-import { useParams } from 'react-router';
-import { connect, useSelector } from 'react-redux';
+import { useParams, useHistory } from 'react-router';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { selectScenes, selectStory } from '../../../store/stories';
+import { removeStory } from '../../../store/stories';
 import { Divider } from 'semantic-ui-react';
 import Scene from './Scene/Scene';
 import StoryTitle from './StoryTitle';
-
 export default withRouter(connect()(EditStoryPage));
 
 function EditStoryPage() {
   const { storyId } = useParams();
   const story = useSelector(selectStory(storyId));
   const scenes = useSelector(selectScenes(storyId));
-
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const remover = i => {
+    dispatch(removeStory(i));
+    history.push('/stories');
+  };
   const sceneComponents = scenes.map(scene => (
     <React.Fragment key={scene.id}>
       <Scene scene={scene} />
@@ -25,9 +30,10 @@ function EditStoryPage() {
   return (
     <div className="page page-editStory">
       <main>
-        <StoryTitle story={story}/>
+        <StoryTitle story={story} />
         <Divider />
         {sceneComponents}
+        <button onClick={remover}>Remove story</button>
       </main>
       <aside>&nbsp;</aside>
     </div>

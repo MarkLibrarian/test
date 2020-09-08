@@ -9,6 +9,8 @@ const storiesSlice = createSlice({
     newStory: addStory,
     updateSceneTitle: saveSceneTitle,
     updateStoryTitle: saveStoryTitle,
+    removeStory: storyRemover,
+
     newPassage: {
       reducer: addPassage,
       prepare: passage => ({
@@ -55,8 +57,17 @@ function addPassage(state, action) {
   const scene = selectScene(sceneId)(state);
   scene.passages.push(id);
 }
+function storyRemover({ stories }, action) {
+  return stories.stories.filter(i => i.id !== action.payload.id);
+}
 
-export const { newStory, updateSceneTitle, updateStoryTitle, newPassage } = storiesSlice.actions;
+export const {
+  newStory,
+  updateSceneTitle,
+  updateStoryTitle,
+  removeStory,
+  newPassage
+} = storiesSlice.actions;
 
 export default storiesSlice.reducer;
 
