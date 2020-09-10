@@ -11,6 +11,7 @@ const storiesSlice = createSlice({
     updateStoryTitle: saveStoryTitle,
     removeStory: storyRemover,
     removeScene: sceneRemover,
+    removeImage: imageRemover,
     newPassage: {
       reducer: addPassage,
       prepare: passage => ({
@@ -63,6 +64,9 @@ function storyRemover({ stories }, action) {
 function sceneRemover({ stories }, action) {
   delete stories.scenesById[action.payload.id];
 }
+function imageRemover({ stories }, action) {
+  delete stories.imagesById[action.payload.id];
+}
 
 export const {
   newStory,
@@ -70,6 +74,7 @@ export const {
   updateStoryTitle,
   removeStory,
   removeScene,
+  removeImage,
   newPassage
 } = storiesSlice.actions;
 

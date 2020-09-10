@@ -3,7 +3,11 @@ import './Scene.css';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { SceneImage } from './SceneImage/SceneImage';
 import SceneFiction from './SceneFiction/SceneFiction';
-import { selectImage, removeScene } from '../../../../store/stories';
+import {
+  selectImage,
+  removeScene,
+  removeImage
+} from '../../../../store/stories';
 import SceneTitle from './SceneTitle';
 
 export default connect()(Scene);
@@ -13,6 +17,11 @@ function Scene({ scene }) {
   const dispatch = useDispatch();
   const removerOfScene = i => {
     dispatch(removeScene({ id: scene.id }));
+  };
+  const removerOfImage = i => {
+    if ('id' !== 'undefined') {
+      dispatch(removeImage({ id: image.value }));
+    }
   };
   return (
     <div className="scene">
@@ -43,8 +52,15 @@ function Scene({ scene }) {
           </div>
           <SceneFiction sceneId={scene.id} />
         </div>
+
         <div className="sidebar">
           <SceneImage image={image} />
+          <button
+            className="ui negative labeled icon button"
+            onClick={removerOfImage}
+          >
+            <i className="delete icon"></i>Delete image
+          </button>
         </div>
       </div>
     </div>
