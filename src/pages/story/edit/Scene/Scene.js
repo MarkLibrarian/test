@@ -20,7 +20,7 @@ function Scene({ scene }) {
   };
   const removerOfImage = i => {
     if ('id' !== 'undefined') {
-      dispatch(removeImage({ id: image.value }));
+      dispatch(removeImage({ id: image.id }));
     }
   };
   return (
