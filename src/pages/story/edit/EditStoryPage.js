@@ -8,21 +8,25 @@ import { removeStory } from '../../../store/stories';
 import { Divider } from 'semantic-ui-react';
 import Scene from './Scene/Scene';
 import StoryTitle from './StoryTitle';
+
 export default withRouter(connect()(EditStoryPage));
 
 function EditStoryPage() {
   const { storyId } = useParams();
   const story = useSelector(selectStory(storyId));
   const scenes = useSelector(selectScenes(storyId));
+
   const history = useHistory();
   const dispatch = useDispatch();
   const remover = i => {
-    dispatch(removeStory(i));
+    dispatch(removeStory({ id: storyId }));
     history.push('/stories');
   };
+
   const sceneComponents = scenes.map(scene => (
     <React.Fragment key={scene.id}>
       <Scene scene={scene} />
+
       <Divider />
     </React.Fragment>
   ));
@@ -33,7 +37,10 @@ function EditStoryPage() {
         <StoryTitle story={story} />
         <Divider />
         {sceneComponents}
-        <button onClick={remover}>Remove story</button>
+        <button className="ui negative labeled icon button" onClick={remover}>
+          <i className="delete icon"></i>
+          Remove story
+        </button>
       </main>
       <aside>&nbsp;</aside>
     </div>
