@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
 import { BrowserRouter as Router } from 'react-router-dom';
-
 import WelcomePage from './pages/welcome/WelcomePage';
 import EditStoryPage from './pages/story/edit/EditStoryPage';
 import ViewStoryPage from './pages/story/view/ViewStoryPage';

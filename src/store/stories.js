@@ -9,6 +9,9 @@ const storiesSlice = createSlice({
     newStory: addStory,
     updateSceneTitle: saveSceneTitle,
     updateStoryTitle: saveStoryTitle,
+    removeStory: storyRemover,
+    removeScene: sceneRemover,
+    removeImage: imageRemover,
     newPassage: {
       reducer: addPassage,
       prepare: passage => ({
@@ -55,8 +58,25 @@ function addPassage(state, action) {
   const scene = selectScene(sceneId)(state);
   scene.passages.push(id);
 }
+function storyRemover({ stories }, action) {
+  delete stories.storiesById[action.payload.id];
+}
+function sceneRemover({ stories }, action) {
+  delete stories.scenesById[action.payload.id];
+}
+function imageRemover({ stories }, action) {
+  delete stories.imagesById[action.payload.id];
+}
 
-export const { newStory, updateSceneTitle, updateStoryTitle, newPassage } = storiesSlice.actions;
+export const {
+  newStory,
+  updateSceneTitle,
+  updateStoryTitle,
+  removeStory,
+  removeScene,
+  removeImage,
+  newPassage
+} = storiesSlice.actions;
 
 export default storiesSlice.reducer;
 
