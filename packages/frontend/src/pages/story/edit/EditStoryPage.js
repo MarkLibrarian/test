@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import {
   fetchStory,
   selectStory,
+  removeStory,
   saveSceneTitle,
   saveSceneContent,
   createNewSceneInStory,
@@ -16,13 +17,15 @@ import { Divider } from 'semantic-ui-react';
 
 export default withRouter(connect()(EditStoryPage));
 
-function EditStoryPage() {
+function EditStoryPage({ history }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const { storyId } = useParams();
 
-  useEffect(() => dispatch(fetchStory(storyId)), [storyId, dispatch]);
+  useEffect(() => {
+    dispatch(fetchStory(storyId));
+  }, [storyId, dispatch]);
 
   const story = useSelector(selectStory(storyId));
 
@@ -35,6 +38,11 @@ function EditStoryPage() {
   const saveImage = (scene) => {
     // to "save" we just re-fetch the story which will have the new image
     dispatch(fetchStory(scene.storyId));
+  };
+
+  const onRemoveStory = () => {
+    dispatch(removeStory({ storyId }));
+    history.push('/');
   };
 
   const createNewScene = () => dispatch(createNewSceneInStory({ storyId }));
@@ -73,6 +81,10 @@ function EditStoryPage() {
           >
             {t('page.story.view.linkTo')}
           </a>
+          <button onClick={onRemoveStory} className="ui labeled icon button">
+            <i className="delete icon" />
+            {t('page.story.edit.removeStory')}
+          </button>
           <button onClick={createNewScene} className="ui labeled icon button">
             <i className="plus icon" />
             {t('page.story.edit.addScene')}

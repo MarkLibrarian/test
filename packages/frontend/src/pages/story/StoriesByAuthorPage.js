@@ -18,7 +18,9 @@ function StoriesByAuthorPage({ createStory }) {
 
   const { authorId } = useParams();
 
-  useEffect(() => dispatch(getStoriesByAuthor(authorId)), [authorId, dispatch]);
+  useEffect(() => {
+    dispatch(getStoriesByAuthor(authorId));
+  }, [authorId, dispatch]);
 
   const allStories = useSelector(selectStoriesByAuthor);
 

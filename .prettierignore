@@ -9,3 +9,5 @@ coverage
 build
 
 docs/
+
+src/stories/format/grammar.js

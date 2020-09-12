@@ -10,6 +10,7 @@
       "page.story.edit.heading": "{{title}}",
       "page.story.edit.heading.loading": "Loading",
       "page.story.edit.addScene": "Add Scene",
+      "page.story.edit.removeStory": "Remove Story",
       "page.story.edit.sceneImage.textAlt": "Scene image for \"{{title}}\"",
       "page.story.heading": "{{title}} by {{author}}",
       "page.story.view.linkTo": "View Story",

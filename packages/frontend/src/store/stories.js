@@ -20,6 +20,7 @@ const storiesSlice = createSlice({
     newStory: addStory,
     storeStory: storeCompleteStory,
     storeStoriesByAuthor: storiesByAuthor,
+    removeStoryFromStore: removeCompleteStory,
   },
 });
 
@@ -27,6 +28,7 @@ export const {
   newStory,
   storeStory,
   storeStoriesByAuthor,
+  removeStoryFromStore,
 } = storiesSlice.actions;
 
 export default storiesSlice.reducer;
@@ -76,6 +78,12 @@ function storeCompleteStory(state, action) {
   state.storiesById[story.id] = story;
 }
 
+function removeCompleteStory(state, action) {
+  const storyId = action.payload.storyId;
+
+  delete state.storiesById[storyId];
+}
+
 export function fetchStory(storyId) {
   return (dispatch) =>
     fetch(`/api/story/${storyId}`)
@@ -119,4 +127,14 @@ export function createNewSceneInStory({ storyId }) {
     })
       .then((res) => res.json())
       .then((story) => dispatch(storeStory(story)));
+}
+
+export function removeStory({ storyId }) {
+  return (dispatch) =>
+    fetch(`/api/story/${storyId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(() => dispatch(removeStoryFromStore({ storyId })));
 }
