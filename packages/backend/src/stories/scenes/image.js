@@ -1,3 +1,5 @@
+const cloudinary = require('cloudinary').v2;
+
 function saveSceneImage(uploadImage, saveImage) {
   return ({ sceneId, image }) =>
     uploadImage(image.name, image.data).then((image) =>
@@ -9,7 +11,6 @@ const THUMBNAIL_WIDTH = 288;
 const THUMBNAIL_HEIGHT = 192;
 
 function uploadImageViaCloudinary(
-  cloudinary = require('cloudinary').v2,
   defaultOptions = {
     eager: [
       /* eagerly generate the thumbnail */ {
@@ -40,6 +41,12 @@ function uploadImageViaCloudinary(
     );
 }
 
+function deleteImageFromCloudinary() {
+  return () => {
+    throw new Error('Not implemented');
+  };
+}
+
 function thumbnail(url) {
   return url.replace(
     /image\/upload/,
@@ -50,4 +57,5 @@ function thumbnail(url) {
 module.exports = {
   uploadImageViaCloudinary,
   saveSceneImage,
+  deleteImageFromCloudinary,
 };

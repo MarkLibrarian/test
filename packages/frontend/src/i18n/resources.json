@@ -22,6 +22,7 @@
       "linkTo.homePage.text": "Home",
       "sceneImage.fileUpload.dropPasteFiles": "Drop or %{browse}",
       "sceneImage.fileUpload.browse": "browse",
+      "sceneImage.remove": "Remove Image",
       "save": "Save",
       "cancel": "Cancel"
     }

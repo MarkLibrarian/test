@@ -8,6 +8,7 @@ import {
   fetchStory,
   selectStory,
   removeStory,
+  removeImage,
   saveSceneTitle,
   saveSceneContent,
   createNewSceneInStory,
@@ -40,6 +41,10 @@ function EditStoryPage({ history }) {
     dispatch(fetchStory(scene.storyId));
   };
 
+  const removeImageFromScene = ({ sceneId, imageId }) => {
+    dispatch(removeImage({ storyId, sceneId, imageId }));
+  };
+
   const onRemoveStory = () => {
     dispatch(removeStory({ storyId }));
     history.push('/');
@@ -51,9 +56,10 @@ function EditStoryPage({ history }) {
     <React.Fragment key={scene.id}>
       <Scene
         scene={scene}
-        saveImage={saveImage}
         saveTitle={saveTitle}
         saveFiction={saveFiction}
+        saveImage={saveImage}
+        removeImage={removeImageFromScene}
       />
       <Divider />
     </React.Fragment>

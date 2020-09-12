@@ -2,6 +2,12 @@ const Postgres = require('pg');
 const Config = require('config');
 const Express = require('express');
 const ContinuationLocalStorage = require('continuation-local-storage');
+
+const {
+  deleteImageFromDatabase,
+} = require('./stories/db/deleteImageFromDatabase');
+const { deleteImageRoute, deleteImage } = require('./stories/deleteSceneRoute');
+
 const {
   deleteStoryFromDatabase,
 } = require('./stories/db/deleteStoryFromDatabase');
@@ -32,6 +38,7 @@ const {
   saveSceneTitleRoute,
   saveSceneImage,
   uploadImageViaCloudinary,
+  deleteImageFromCloudinary,
 } = require('./stories/scenes');
 
 const {
@@ -124,6 +131,12 @@ function createRoutes(log) {
         getStory
       ),
       deleteStoryRoute(tx(deleteStoryFromDatabase(log, getConnection))),
+      deleteImageRoute(
+        deleteImage(
+          tx(deleteImageFromDatabase(log, getConnection)),
+          deleteImageFromCloudinary()
+        )
+      ),
     ]),
   ];
 }

@@ -134,10 +134,6 @@ exports.up = function (db, callback) {
         foreignKey: {
           name: 'scene_to_image_fk',
           table: 'image',
-          rules: {
-            onDelete: 'CASCADE',
-            onUpdate: 'RESTRICT',
-          },
           mapping: 'id',
         },
       },

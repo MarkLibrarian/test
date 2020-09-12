@@ -138,3 +138,13 @@ export function removeStory({ storyId }) {
       },
     }).then(() => dispatch(removeStoryFromStore({ storyId })));
 }
+
+export function removeImage({ storyId, sceneId, imageId }) {
+  return (dispatch) =>
+    fetch(`/api/scene/${sceneId}/image/${imageId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }).then(() => dispatch(fetchStory(storyId)));
+}

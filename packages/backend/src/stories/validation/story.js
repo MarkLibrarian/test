@@ -5,12 +5,21 @@ const { isPositiveIntegerString } = require('./index');
 
 const LABEL_STORY_ID = 'storyId';
 const LABEL_SCENE_ID = 'sceneId';
+const LABEL_IMAGE_ID = 'imageId';
 
 const storyIdValidator = ow.create(
   LABEL_STORY_ID,
   ow.string.numeric.validate((value) => ({
     validator: isPositiveIntegerString(value),
     message: `Expected \`${LABEL_STORY_ID}\` to be a positive integer, got \`${value}\``,
+  }))
+);
+
+const imageIdValidator = ow.create(
+  LABEL_IMAGE_ID,
+  ow.string.numeric.validate((value) => ({
+    validator: isPositiveIntegerString(value),
+    message: `Expected \`${LABEL_IMAGE_ID}\` to be a positive integer, got \`${value}\``,
   }))
 );
 
@@ -67,6 +76,8 @@ const sceneTitleValidator = ow.create(
 
 const validateStoryId = (get) => pipe([get, storyIdValidator]);
 
+const validateImageId = (get) => pipe([get, imageIdValidator]);
+
 const validateSceneId = (optional = false) => (get) =>
   pipe([get, sceneIdValidator(optional)]);
 
@@ -77,8 +88,10 @@ const validateSceneTitle = (get) => pipe([get, sceneTitleValidator]);
 const validateSceneContent = (get) => pipe([get, sceneContentValidator]);
 
 module.exports = {
+  validateImageId,
   validateSceneId,
   validateStoryId,
+  imageIdValidator,
   completeStoryValidator,
   validateCompleteStory,
   sceneContentValidator,

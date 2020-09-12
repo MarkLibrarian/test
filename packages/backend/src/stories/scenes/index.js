@@ -1,7 +1,11 @@
 const { saveSceneImageRoute } = require('./saveSceneImageRoute');
 const { saveSceneTitleRoute } = require('./saveSceneTitleRoute');
 const { saveSceneContentRoute } = require('./saveSceneContentRoute');
-const { saveSceneImage, uploadImageViaCloudinary } = require('./image');
+const {
+  saveSceneImage,
+  uploadImageViaCloudinary,
+  deleteImageFromCloudinary,
+} = require('./image');
 
 module.exports = {
   saveSceneImage,
@@ -9,4 +13,5 @@ module.exports = {
   uploadImageViaCloudinary,
   saveSceneTitleRoute,
   saveSceneContentRoute,
+  deleteImageFromCloudinary,
 };
